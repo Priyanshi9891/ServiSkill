@@ -48,14 +48,7 @@ export default function ChatPage() {
   return (
     <>
     
-      {/* <h1 className="text-3xl font-bold mb-5">
-        Chat
-      </h1>
-
-      <p className="mb-5">
-        Service: {booking.service}
-      </p> */}
-
+    
      <ChatWindow
   bookingId={booking._id}
   currentUserId={session.user.id}

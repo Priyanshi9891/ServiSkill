@@ -1,35 +1,12 @@
+import { Suspense } from "react";
+import MessagesContent from "./MessagesContent";
 
-"use client";
+export const dynamic = "force-dynamic";
 
-import { useSession } from "next-auth/react";
-import { useSearchParams } from "next/navigation";
-
-import ChatWindow from "@/components/chat/ChatWindow";
-
-export default function MessagesPage() {
-
-  const { data: session } = useSession();
-
-  const searchParams = useSearchParams();
-
-  const receiverId =
-    searchParams.get("receiverId");
-console.log("receiverId =", receiverId);
-  if (!session || !receiverId)
-    return <p>Loading...</p>;
-
+export default function Page() {
   return (
-    <div className="p-10">
-
-      <h1 className="text-2xl font-bold mb-5">
-        Chat
-      </h1>
-
-      <ChatWindow
-        currentUserId={session.user.id}
-        receiverId={receiverId}
-      />
-
-    </div>
+    <Suspense fallback={<div>Loading...</div>}>
+      <MessagesContent />
+    </Suspense>
   );
 }
