@@ -39,8 +39,8 @@ export default function MessagesContent() {
   async function submitReview(e) {
     e.preventDefault();
 
-    console.log(formData);
-
+    
+console.log("Provider ID:", formData.providerId);
     const res = await fetch(
       "/api/reviews",
       {

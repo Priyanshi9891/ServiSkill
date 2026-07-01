@@ -16,7 +16,7 @@ export default function DemoPaymentContent() {
   const amount =
     bookingData.serviceType === "Skill Teaching"
       ? bookingData.creditsRequired
-      : 799;
+      : bookingData.pricing;
 
   const handlePayment = async () => {
     try {
@@ -129,7 +129,7 @@ export default function DemoPaymentContent() {
               </p>
 
               <p className="text-3xl font-bold text-purple-700">
-                ₹799
+                ₹{amount}
               </p>
 
             </div>

@@ -25,7 +25,8 @@ const creditsRequired =
   Number(
     searchParams.get("creditsRequired")
   ) || 0;
-
+const pricing =
+  Number(searchParams.get("pricing")) || 0;
 const skill =
   searchParams.get("skill") || "";
 
@@ -50,118 +51,7 @@ const level =
     });
   };
 
-//  const handleSubmit = async (e) => {
-//   e.preventDefault();
 
-//   if (!session?.user) {
-//     alert("Please login first");
-//     return;
-//   }
-
-//   try {
-
-//     // Skill Teaching
-//     if (
-//       serviceType === "Skill Teaching"
-//     ) {
-
-//       const userRes = await fetch(
-//         `/api/users/${session.user.id}`
-//       );
-
-//       const user =
-//         await userRes.json();
-
-//       if (
-//         user.credits <
-//         creditsRequired
-//       ) {
-//         alert(
-//           "Not enough credits"
-//         );
-//         return;
-//       }
-
-    
-//     }
-
-//     const bookingData = {
-//       customerId:
-//         session.user.id,
-
-//       customerName:
-//         session.user.name,
-
-//       customerEmail:
-//         session.user.email,
-
-//       providerId,
-//       providerName,
-//       providerEmail,
-
-//       serviceType,
-
-//       creditsRequired,
-
-//       service:
-//     serviceType === "Skill Teaching"
-//       ? skill
-//       : formData.service,
-
-//   bookingDate:
-//     serviceType === "Skill Teaching"
-//       ? new Date().toISOString()
-//       : formData.bookingDate,
-//     };
-
-//     const res = await fetch(
-//       "/api/bookings",
-//       {
-//         method: "POST",
-//         headers: {
-//           "Content-Type":
-//             "application/json",
-//         },
-//         body: JSON.stringify(
-//           bookingData
-//         ),
-//       }
-//     );
-
-//     const data =
-//       await res.json();
-
-//     if (data.success) {
-
-//       alert(
-//         serviceType ===
-//           "Skill Teaching"
-//           ? `${creditsRequired} credits deducted`
-//           : "Booking Created"
-//       );
-
-//      if (session.user.role === "provider") {
-//   router.push("/dashboard/provider");
-// } else {
-//   router.push("/dashboard/customer");
-// }
-
-//     } else {
-
-//       alert(data.message);
-
-//     }
-
-//   } catch (error) {
-
-//     console.log(error);
-
-//     alert(
-//       "Something went wrong"
-//     );
-
-//   }
-// };
 const handleSubmit = async (e) => {
   e.preventDefault();
 
@@ -194,7 +84,7 @@ const handleSubmit = async (e) => {
       providerId,
       providerName,
       providerEmail,
-
+        pricing,
       serviceType,
       creditsRequired,
 

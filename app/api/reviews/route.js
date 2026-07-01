@@ -45,8 +45,8 @@ export async function POST(req) {
       rating: Number(body.rating),
       comment: body.comment,
     });
-    await createNotification({
-  userId: providerId,
+   await createNotification({
+  userId: body.providerId,
   title: "New Review",
   message: "A customer left a review",
   type: "review",
@@ -63,14 +63,21 @@ export async function POST(req) {
         0
       ) / allReviews.length;
 
-    const provider =
-      await Provider.findByIdAndUpdate(
-        body.providerId,
-        {
-          rating: averageRating.toFixed(1),
-        },
-        { new: true }
-      );
+    const provider = await Provider.findById(body.providerId);
+
+if (!provider) {
+  return NextResponse.json(
+    {
+      success: false,
+      message: "Provider not found",
+    },
+    { status: 404 }
+  );
+}
+
+provider.rating = Number(averageRating.toFixed(1));
+
+await provider.save();
      const providerUser = await User.findOne({
   email: provider.email,
 });
@@ -85,7 +92,7 @@ if (providerUser) {
   });
 }
 
-    // Bonus for 5 star rating
+   
     if (Number(body.rating) === 5) {
       const providerUser =
         await User.findOne({

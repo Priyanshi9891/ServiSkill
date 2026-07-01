@@ -590,7 +590,7 @@ setAiSearchPerformed(true);
 
  
   <Link
-  href={`/bookings/create?providerId=${provider._id}&providerName=${provider.name}&providerEmail=${provider.email}&serviceType=${provider.serviceType}&creditsRequired=${provider.creditsRequired || 0}&skill=${encodeURIComponent(provider.skill || "")}&duration=${encodeURIComponent(provider.duration || "")}&level=${encodeURIComponent(provider.level || "")}`}
+  href={`/bookings/create?providerId=${provider._id}&providerName=${provider.name}&providerEmail=${provider.email}&serviceType=${provider.serviceType}&pricing=${provider.pricing || 0}&creditsRequired=${provider.creditsRequired || 0}&skill=${encodeURIComponent(provider.skill || "")}&duration=${encodeURIComponent(provider.duration || "")}&level=${encodeURIComponent(provider.level || "")}`}
   className={`text-white px-6 py-3 rounded-full font-semibold ${
     provider.serviceType === "Skill Teaching"
       ? "bg-yellow-500 hover:bg-yellow-600"

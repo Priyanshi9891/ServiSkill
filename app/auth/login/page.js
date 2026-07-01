@@ -7,20 +7,26 @@ import Link from "next/link";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 export default function LoginPage() {
   const router = useRouter();
-
+const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 const [showPassword, setShowPassword] = useState(false);
   const handleLogin = async (e) => {
     e.preventDefault();
-
+setLoading(true);
     const result = await signIn("credentials", {
       email,
       password,
       redirect: false,
     });
 
-    console.log(result);
+
+if (result?.error) {
+  alert(" Login failed. Please try again.");
+  return;
+}
+
+    // console.log(result);
 
    if (!result?.error) {
   const res = await fetch("/api/auth/session");
@@ -152,24 +158,18 @@ const [showPassword, setShowPassword] = useState(false);
 </div>
 
       {/* Login Button */}
+  
       <button
-        type="submit"
-        className="
-          w-full
-          py-3
-          rounded-xl
-          bg-gradient-to-r
-          from-blue-500
-          to-cyan-500
-          text-white
-          shadow-lg
-          shadow-blue-200
-          hover:scale-[1.02]
-          transition-all
-        "
-      >
-        Login
-      </button>
+  type="submit"
+  disabled={loading}
+  className={`w-full py-3 rounded-lg text-white font-semibold transition ${
+    loading
+      ? "bg-gray-400 cursor-not-allowed"
+      : "bg-blue-600 hover:bg-blue-700"
+  }`}
+>
+  {loading ? "Logging in..." : "Login"}
+</button>
 
       {/* Register Link */}
       <p className="text-center text-sm text-black/70 mt-6">

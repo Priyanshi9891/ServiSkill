@@ -102,36 +102,63 @@ const [loadingLocation, setLoadingLocation] =
 
   try {
   
-if (!selectedLocation) {
-  alert(
-    "Please search and confirm location first"
-  );
-  return;
+// if (!selectedLocation) {
+//   alert(
+//     "Please search and confirm location first"
+//   );
+//   return;
+// }
+
+// const latitude = Number(
+//   selectedLocation.lat
+// );
+
+// const longitude = Number(
+//   selectedLocation.lon
+// );
+let latitude = 0;
+let longitude = 0;
+let location = "";
+
+if (serviceType === "Professional") {
+  if (!selectedLocation) {
+    alert("Please search and confirm location first");
+    return;
+  }
+
+  latitude = Number(selectedLocation.lat);
+  longitude = Number(selectedLocation.lon);
+  location = selectedLocation.display_name;
 }
 
-const latitude = Number(
-  selectedLocation.lat
-);
 
-const longitude = Number(
-  selectedLocation.lon
-);
     const providerData = {
       ...formData,
 
-      location:
-  selectedLocation.display_name,
+//       location:
+//   selectedLocation.display_name,
+
+// latitude,
+// longitude,
+
+// geoLocation: {
+//   type: "Point",
+//   coordinates: [
+//     longitude,
+//     latitude,
+//   ],
+// },
+location,
 
 latitude,
+
 longitude,
 
 geoLocation: {
   type: "Point",
-  coordinates: [
-    longitude,
-    latitude,
-  ],
+  coordinates: [longitude, latitude],
 },
+
 
       userId: session.user.id,
       email: session.user.email,
@@ -701,13 +728,22 @@ return (
               required
             />
 
-            <input
+            {/* <input
               type="text"
               name="location"
               placeholder="Location"
               className="w-full border text-gray-500 rounded-xl p-3"
               onChange={handleChange}
-            />
+            /> */}
+            <div className="bg-blue-50 border border-blue-300 rounded-xl p-4">
+  <p className="font-semibold text-blue-700">
+    🌐 This skill will be taught online.
+  </p>
+
+  <p className="text-black mt-2">
+    No physical location is required.
+  </p>
+</div>
 
             <input
               type="number"

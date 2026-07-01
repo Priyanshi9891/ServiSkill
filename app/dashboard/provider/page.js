@@ -18,7 +18,7 @@ import {
   FaCheckCircle,
   FaCalendarCheck,FaMapMarkerAlt,FaRupeeSign,
   FaBriefcase,
-  FaStar,
+  FaStar,FaChalkboardTeacher,
  FaClipboardList,
   FaBookOpen,  FaComments,
   FaExclamationTriangle,
@@ -666,102 +666,153 @@ return (
 
   </div>
 
-  <div className="grid md:grid-cols-2 gap-6">
-
-    {services.map((service) => (
-
-      <div
-        key={service._id}
-        className="bg-white rounded-3xl shadow-lg hover:shadow-2xl border border-gray-100 p-6 transition-all duration-300"
-      >
-
-        {/* Service Header */}
-
-        <div className="flex items-center gap-4 mb-6">
-
-          <div className="w-14 h-14 rounded-full bg-gradient-to-r from-blue-500 to-indigo-600 flex items-center justify-center text-white text-2xl">
-
+<div className="grid md:grid-cols-2 gap-6">
+  {services.map((service) => (
+    <div
+      key={service._id}
+      className="bg-white rounded-3xl shadow-lg hover:shadow-2xl border border-gray-100 p-6 transition-all duration-300"
+    >
+      {/* Header */}
+      <div className="flex items-center gap-4 mb-6">
+        <div
+          className={`w-14 h-14 rounded-full flex items-center justify-center text-white text-2xl ${
+            service.serviceType === "Professional"
+              ? "bg-gradient-to-r from-blue-500 to-indigo-600"
+              : "bg-gradient-to-r from-yellow-500 to-orange-500"
+          }`}
+        >
+          {service.serviceType === "Professional" ? (
             <FaTools />
-
-          </div>
-
-          <div>
-
-            <h3 className="text-2xl font-bold text-gray-900">
-              {service.skill}
-            </h3>
-
-            <p className="text-gray-500">
-              Professional Service
-            </p>
-
-          </div>
-
+          ) : (
+            <FaChalkboardTeacher />
+          )}
         </div>
 
+        <div>
+          <h3 className="text-2xl font-bold text-black">
+            {service.skill}
+          </h3>
+
+          <p className="text-black">
+            {service.serviceType === "Professional"
+              ? "Professional Service"
+              : "Skill Teaching"}
+          </p>
+        </div>
+      </div>
+
+      {/* Professional Card */}
+      {service.serviceType === "Professional" ? (
         <div className="space-y-4">
 
           <div className="flex items-center gap-3 bg-blue-50 rounded-xl p-3">
-
             <FaBriefcase className="text-blue-600 text-lg" />
 
             <div>
-
-              <p className="text-sm text-gray-500">
+              <p className="text-sm text-black">
                 Experience
               </p>
 
-              <p className="font-semibold text-gray-900">
+              <p className="font-semibold text-black">
                 {service.experience} Years
               </p>
-
             </div>
-
           </div>
 
           <div className="flex items-center gap-3 bg-green-50 rounded-xl p-3">
-
             <FaRupeeSign className="text-green-600 text-lg" />
 
             <div>
-
-              <p className="text-sm text-gray-500">
+              <p className="text-sm text-black">
                 Price
               </p>
 
-              <p className="font-semibold text-gray-900">
+              <p className="font-semibold text-black">
                 ₹{service.pricing}
               </p>
-
             </div>
-
           </div>
 
           <div className="flex items-center gap-3 bg-orange-50 rounded-xl p-3">
-
             <FaMapMarkerAlt className="text-orange-600 text-lg" />
 
             <div>
-
-              <p className="text-sm text-gray-500">
+              <p className="text-sm text-black">
                 Location
               </p>
 
-              <p className="font-semibold text-gray-900">
+              <p className="font-semibold text-black">
                 {service.location}
               </p>
-
             </div>
-
           </div>
 
         </div>
+      ) : (
+        /* Skill Teaching Card */
+        <div className="space-y-4">
 
-      </div>
+          <div className="flex items-center gap-3 bg-yellow-50 rounded-xl p-3">
+            📚
 
-    ))}
+            <div>
+              <p className="text-sm text-black">
+                Level
+              </p>
 
-  </div>
+              <p className="font-semibold text-black">
+                {service.level}
+              </p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-3 bg-purple-50 rounded-xl p-3">
+            ⏳
+
+            <div>
+              <p className="text-sm text-black">
+                Duration
+              </p>
+
+              <p className="font-semibold text-black">
+                {service.duration}
+              </p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-3 bg-green-50 rounded-xl p-3">
+            🪙
+
+            <div>
+              <p className="text-sm text-black">
+                Credits Required
+              </p>
+
+              <p className="font-semibold text-black">
+                {service.creditsRequired}
+              </p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-3 bg-cyan-50 rounded-xl p-3">
+            🌐
+
+            <div>
+              <p className="text-sm text-black">
+                Mode
+              </p>
+
+              <p className="font-semibold text-green-600">
+                Online
+              </p>
+            </div>
+          </div>
+
+        </div>
+      )}
+    </div>
+  ))}
+</div>
 
 </section>
 
